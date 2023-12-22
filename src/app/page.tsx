@@ -1,10 +1,10 @@
 "use client";
-import { useGetFavourites, useGetImagesSearch } from "@/api/catsApi";
-import { GetImagesSearch200 } from "@/api/schemas";
+import {useGetFavourites, useGetImagesSearch} from "@/api/catsApi";
+import {GetImagesSearch200} from "@/api/schemas";
 import Modal from "@/components/Modal";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useEffect, useState} from "react";
 
 import CatModalBody from "@/modals/CatBody";
 
@@ -12,13 +12,17 @@ const INITIAL_CATS_TO_SHOW = 10; // api accepts 1 or 10 values only without toke
 
 export default function Home() {
   const [cats, setCats] = useState<GetImagesSearch200>([]);
-  const { replace } = useRouter();
-  const { get } = useSearchParams();
+  const {replace} = useRouter();
+  const {get} = useSearchParams();
 
-  const { data, refetch, isFetching } = useGetImagesSearch({
+  const {data, refetch, isFetching} = useGetImagesSearch({
     limit: INITIAL_CATS_TO_SHOW,
   });
-  const { data: favorites, refetch: refetchFavorites } = useGetFavourites();
+  const {
+    data: favorites,
+    refetch: refetchFavorites,
+    isFetching: isFetchingFavorites,
+  } = useGetFavourites();
 
   useEffect(() => {
     data && setCats((prev) => [...prev, ...data]);
@@ -55,7 +59,8 @@ export default function Home() {
         <Modal onClose={handleCloseModal}>
           <CatModalBody
             catId={catId}
-            isFavorite={Boolean(favorites?.find((x) => x.image?.id === catId))}
+            favorite={favorites?.find((x) => x.image?.id === catId)}
+            isFetchingFavorites={isFetchingFavorites}
             refetchFavorites={async () => {
               await refetchFavorites();
             }}
@@ -63,31 +68,28 @@ export default function Home() {
         </Modal>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {cats.map((cat) => (
-          <Image
-            key={cat.id}
-            onClick={() => handleOpenModal(cat.id)}
-            className="h-[300px] w-full object-cover max-w-full rounded-lg hover:scale-95 transition-all duration-300 ease-in-out cursor-pointer"
-            src={cat.url}
-            alt=""
-            width={300}
-            height={300}
-          />
+          <div key={cat.id}>
+            <Image
+              onClick={() => handleOpenModal(cat.id)}
+              className="h-[300px] w-full max-w-full cursor-pointer rounded-lg object-cover transition-all duration-300 ease-in-out hover:scale-95"
+              src={cat.url}
+              alt=""
+              width={300}
+              height={300}
+            />
+          </div>
         ))}
 
         {isFetching &&
           Array(INITIAL_CATS_TO_SHOW)
             .fill(0)
             .map((_, i) => (
-              <div
-                key={i}
-                role="status"
-                className="animate-pulse md:flex md:items-center"
-              >
-                <div className="flex items-center justify-center w-full h-[300px] bg-gray-300 rounded">
+              <div key={i} role="status" className="animate-pulse md:flex md:items-center">
+                <div className="flex h-[300px] w-full items-center justify-center rounded bg-gray-300">
                   <svg
-                    className="w-10 h-10 text-gray-200"
+                    className="h-10 w-10 text-gray-200"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -100,9 +102,9 @@ export default function Home() {
               </div>
             ))}
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="mt-4 flex justify-center">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={isFetching}
           aria-disabled={isFetching}
           onClick={handleLoadMore}
@@ -111,7 +113,7 @@ export default function Home() {
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="w-8 h-8 text-gray-200 animate-spin fill-blue-600"
+                className="h-8 w-8 animate-spin fill-blue-600 text-gray-200"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

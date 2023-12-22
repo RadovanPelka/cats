@@ -1,16 +1,24 @@
+import clsx from "clsx";
 import React from "react";
 
 type FavoriteButtonProps = {
   isFavorite: boolean;
   onClick: () => Promise<void>;
+  isDisabled?: boolean;
 };
 
-const FavoriteButton = ({ onClick, isFavorite }: FavoriteButtonProps) => {
+const FavoriteButton = ({onClick, isFavorite, isDisabled}: FavoriteButtonProps) => {
   return (
     <button
       type="button"
+      disabled={isDisabled}
+      aria-disabled={isDisabled}
       onClick={onClick}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+      className={clsx(
+        "rounded bg-blue-500 px-4 py-2 font-bold text-white",
+        "hover:bg-blue-700",
+        "disabled:cursor-not-allowed disabled:opacity-50"
+      )}
     >
       {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
     </button>

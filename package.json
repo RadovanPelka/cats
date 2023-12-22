@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen:api": "orval --config ./orval.config.ts"
+    "gen:api": "orval --config ./orval.config.ts",
+    "app:prettier": "prettier --no-error-on-unmatched-pattern --write --loglevel error \"src/**/*.(js|jsx|ts|tsx)\""
   },
   "dependencies": {
     "@tanstack/react-query": "^5.14.1",
@@ -27,6 +28,7 @@
     "orval": "^6.20.0",
     "postcss": "^8",
     "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9",
     "tailwindcss": "^3.3.0",
     "typescript": "^4.8.4"
   }

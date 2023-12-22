@@ -1,16 +1,16 @@
 "use client";
-import { useGetFavourites } from "@/api/catsApi";
+import {useGetFavourites} from "@/api/catsApi";
 import Modal from "@/components/Modal";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import Spinner from "@/components/Spinner";
 import CatModalBody from "@/modals/CatBody";
 
 export default function Favorites() {
-  const { replace } = useRouter();
-  const { get } = useSearchParams();
+  const {replace} = useRouter();
+  const {get} = useSearchParams();
 
-  const { data, isFetching, refetch: refetchFavorites } = useGetFavourites();
+  const {data, isFetching, refetch: refetchFavorites} = useGetFavourites();
 
   const handleOpenModal = (breedId: string) => {
     const params = new URLSearchParams();
@@ -32,7 +32,7 @@ export default function Favorites() {
         <Modal onClose={handleCloseModal}>
           <CatModalBody
             catId={catId}
-            isFavorite={Boolean(data?.find((x) => x.image?.id === catId))}
+            favorite={data?.find((x) => x.image?.id === catId)}
             refetchFavorites={async () => {
               await refetchFavorites();
             }}
@@ -47,7 +47,7 @@ export default function Favorites() {
       )}
 
       {data && data?.length !== 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {data.map((cat) => (
             <Image
               key={cat.id}
@@ -56,7 +56,7 @@ export default function Favorites() {
                   handleOpenModal(cat.image.id);
                 }
               }}
-              className="h-[300px] w-full object-cover max-w-full rounded-lg hover:scale-95 transition-all duration-300 ease-in-out cursor-pointer"
+              className="h-[300px] w-full max-w-full cursor-pointer rounded-lg object-cover transition-all duration-300 ease-in-out hover:scale-95"
               src={cat?.image?.url || ""}
               alt=""
               width={300}

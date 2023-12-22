@@ -21,12 +21,12 @@ Just signup for an API Key from https://thecatapi.com for free. We're looking fo
  */
 
 export type GetBreedsSearchParams = {
-/**
- * search term for breed name
- */
-q?: string;
-/**
- * [optional] whether to attach the reference_image_id image or not
- */
-attach_image?: number;
+  /**
+   * search term for breed name
+   */
+  q?: string;
+  /**
+   * [optional] whether to attach the reference_image_id image or not
+   */
+  attach_image?: number;
 };

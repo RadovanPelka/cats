@@ -19,7 +19,7 @@ Our goal is to create free, fun & useful public service API's, helping people le
 Just signup for an API Key from https://thecatapi.com for free. We're looking forward to seeing what you build!
  * OpenAPI spec version: 1.6.1
  */
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import type {
   MutationFunction,
   QueryFunction,
@@ -55,8 +55,8 @@ import type {
   PostWebhooks200,
   PostWebhooksBody,
 } from "./schemas";
-import { customInstance } from "./utils/custom-instance";
-import type { ErrorType, BodyType } from "./utils/custom-instance";
+import {customInstance} from "./utils/custom-instance";
+import type {ErrorType, BodyType} from "./utils/custom-instance";
 
 /**
  * Searchs all approved images. Default is to reutrn RANDOM images, but with an API-Key you can use 'order=DESC' or 'order=ASC' along with the 'page' and 'limit' parameters to paginate through them in the order they were approved.
@@ -64,10 +64,7 @@ import type { ErrorType, BodyType } from "./utils/custom-instance";
 Pagination-Count, Pagination-Page, and Pagination-Limit headers are present in the response so you know the total number of images that can be paginated through for the passed search filters.
  * @summary /images/search
  */
-export const getImagesSearch = (
-  params?: GetImagesSearchParams,
-  signal?: AbortSignal
-) => {
+export const getImagesSearch = (params?: GetImagesSearchParams, signal?: AbortSignal) => {
   return customInstance<GetImagesSearch200>({
     url: `/images/search`,
     method: "get",
@@ -86,33 +83,24 @@ export const getGetImagesSearchQueryOptions = <
 >(
   params?: GetImagesSearchParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getImagesSearch>>,
-        TError,
-        TData
-      >
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getImagesSearch>>, TError, TData>>;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetImagesSearchQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getImagesSearch>>> = ({
-    signal,
-  }) => getImagesSearch(params, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getImagesSearch>>> = ({signal}) =>
+    getImagesSearch(params, signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getImagesSearch>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetImagesSearchQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getImagesSearch>>
->;
+export type GetImagesSearchQueryResult = NonNullable<Awaited<ReturnType<typeof getImagesSearch>>>;
 export type GetImagesSearchQueryError = ErrorType<GetImagesSearch401>;
 
 /**
@@ -124,15 +112,9 @@ export const useGetImagesSearch = <
 >(
   params?: GetImagesSearchParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getImagesSearch>>,
-        TError,
-        TData
-      >
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getImagesSearch>>, TError, TData>>;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetImagesSearchQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -164,27 +146,20 @@ export const getGetImagesBkIEhN3pGQueryOptions = <
   TData = Awaited<ReturnType<typeof getImagesBkIEhN3pG>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<typeof getImagesBkIEhN3pG>>,
-      TError,
-      TData
-    >
-  >;
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getImagesBkIEhN3pG>>, TError, TData>>;
 }) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetImagesBkIEhN3pGQueryKey();
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getImagesBkIEhN3pG>>
-  > = ({ signal }) => getImagesBkIEhN3pG(signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getImagesBkIEhN3pG>>> = ({signal}) =>
+    getImagesBkIEhN3pG(signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getImagesBkIEhN3pG>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
 export type GetImagesBkIEhN3pGQueryResult = NonNullable<
@@ -199,14 +174,8 @@ export const useGetImagesBkIEhN3pG = <
   TData = Awaited<ReturnType<typeof getImagesBkIEhN3pG>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<typeof getImagesBkIEhN3pG>>,
-      TError,
-      TData
-    >
-  >;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getImagesBkIEhN3pG>>, TError, TData>>;
+}): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetImagesBkIEhN3pGQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -241,29 +210,24 @@ export const getGetImagesQueryOptions = <
 >(
   params?: GetImagesParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getImages>>, TError, TData>
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getImages>>, TError, TData>>;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetImagesQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getImages>>> = ({
-    signal,
-  }) => getImages(params, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getImages>>> = ({signal}) =>
+    getImages(params, signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getImages>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetImagesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getImages>>
->;
+export type GetImagesQueryResult = NonNullable<Awaited<ReturnType<typeof getImages>>>;
 export type GetImagesQueryError = ErrorType<unknown>;
 
 /**
@@ -275,11 +239,9 @@ export const useGetImages = <
 >(
   params?: GetImagesParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getImages>>, TError, TData>
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getImages>>, TError, TData>>;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetImagesQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -295,9 +257,7 @@ export const useGetImages = <
  * Make sure you're using the right field to send the image, and Content-Type header
  * @summary /images/upload
  */
-export const postImagesUpload = (
-  postImagesUploadBody: BodyType<PostImagesUploadBody>
-) => {
+export const postImagesUpload = (postImagesUploadBody: BodyType<PostImagesUploadBody>) => {
   const formData = new FormData();
   if (postImagesUploadBody.file !== undefined) {
     formData.append("file", postImagesUploadBody.file);
@@ -312,7 +272,7 @@ export const postImagesUpload = (
   return customInstance<PostImagesUpload201>({
     url: `/images/upload`,
     method: "post",
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: {"Content-Type": "multipart/form-data"},
     data: formData,
   });
 };
@@ -324,27 +284,27 @@ export const getPostImagesUploadMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postImagesUpload>>,
     TError,
-    { data: BodyType<PostImagesUploadBody> },
+    {data: BodyType<PostImagesUploadBody>},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postImagesUpload>>,
   TError,
-  { data: BodyType<PostImagesUploadBody> },
+  {data: BodyType<PostImagesUploadBody>},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postImagesUpload>>,
-    { data: BodyType<PostImagesUploadBody> }
+    {data: BodyType<PostImagesUploadBody>}
   > = (props) => {
-    const { data } = props ?? {};
+    const {data} = props ?? {};
 
     return postImagesUpload(data);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
 export type PostImagesUploadMutationResult = NonNullable<
@@ -356,14 +316,11 @@ export type PostImagesUploadMutationError = ErrorType<unknown>;
 /**
  * @summary /images/upload
  */
-export const usePostImagesUpload = <
-  TError = ErrorType<unknown>,
-  TContext = unknown,
->(options?: {
+export const usePostImagesUpload = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postImagesUpload>>,
     TError,
-    { data: BodyType<PostImagesUploadBody> },
+    {data: BodyType<PostImagesUploadBody>},
     TContext
   >;
 }) => {
@@ -389,27 +346,27 @@ export const getDeleteImagesImageIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteImagesImageId>>,
     TError,
-    { imageId: string },
+    {imageId: string},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteImagesImageId>>,
   TError,
-  { imageId: string },
+  {imageId: string},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteImagesImageId>>,
-    { imageId: string }
+    {imageId: string}
   > = (props) => {
-    const { imageId } = props ?? {};
+    const {imageId} = props ?? {};
 
     return deleteImagesImageId(imageId);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
 export type DeleteImagesImageIdMutationResult = NonNullable<
@@ -421,14 +378,11 @@ export type DeleteImagesImageIdMutationError = ErrorType<unknown>;
 /**
  * @summary /images/:image_id
  */
-export const useDeleteImagesImageId = <
-  TError = ErrorType<unknown>,
-  TContext = unknown,
->(options?: {
+export const useDeleteImagesImageId = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteImagesImageId>>,
     TError,
-    { imageId: string },
+    {imageId: string},
     TContext
   >;
 }) => {
@@ -440,10 +394,7 @@ export const useDeleteImagesImageId = <
 /**
  * @summary /images/:image_id/breeds
  */
-export const getImagesImageIdBreeds = (
-  imageId: string,
-  signal?: AbortSignal
-) => {
+export const getImagesImageIdBreeds = (imageId: string, signal?: AbortSignal) => {
   return customInstance<unknown>({
     url: `/images/${imageId}/breeds`,
     method: "get",
@@ -462,33 +413,25 @@ export const getGetImagesImageIdBreedsQueryOptions = <
   imageId: string,
   options?: {
     query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getImagesImageIdBreeds>>,
-        TError,
-        TData
-      >
+      UseQueryOptions<Awaited<ReturnType<typeof getImagesImageIdBreeds>>, TError, TData>
     >;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetImagesImageIdBreedsQueryKey(imageId);
+  const queryKey = queryOptions?.queryKey ?? getGetImagesImageIdBreedsQueryKey(imageId);
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getImagesImageIdBreeds>>
-  > = ({ signal }) => getImagesImageIdBreeds(imageId, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getImagesImageIdBreeds>>> = ({signal}) =>
+    getImagesImageIdBreeds(imageId, signal);
 
   return {
     queryKey,
     queryFn,
     enabled: !!imageId,
     ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getImagesImageIdBreeds>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
+  } as UseQueryOptions<Awaited<ReturnType<typeof getImagesImageIdBreeds>>, TError, TData> & {
+    queryKey: QueryKey;
+  };
 };
 
 export type GetImagesImageIdBreedsQueryResult = NonNullable<
@@ -506,14 +449,10 @@ export const useGetImagesImageIdBreeds = <
   imageId: string,
   options?: {
     query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getImagesImageIdBreeds>>,
-        TError,
-        TData
-      >
+      UseQueryOptions<Awaited<ReturnType<typeof getImagesImageIdBreeds>>, TError, TData>
     >;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetImagesImageIdBreedsQueryOptions(imageId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -535,7 +474,7 @@ export const postImagesImageIdBreeds = (
   return customInstance<unknown>({
     url: `/images/${imageId}/breeds`,
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
     data: postImagesImageIdBreedsBody,
   });
 };
@@ -547,34 +486,33 @@ export const getPostImagesImageIdBreedsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postImagesImageIdBreeds>>,
     TError,
-    { imageId: string; data: BodyType<PostImagesImageIdBreedsBody> },
+    {imageId: string; data: BodyType<PostImagesImageIdBreedsBody>},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postImagesImageIdBreeds>>,
   TError,
-  { imageId: string; data: BodyType<PostImagesImageIdBreedsBody> },
+  {imageId: string; data: BodyType<PostImagesImageIdBreedsBody>},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postImagesImageIdBreeds>>,
-    { imageId: string; data: BodyType<PostImagesImageIdBreedsBody> }
+    {imageId: string; data: BodyType<PostImagesImageIdBreedsBody>}
   > = (props) => {
-    const { imageId, data } = props ?? {};
+    const {imageId, data} = props ?? {};
 
     return postImagesImageIdBreeds(imageId, data);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
 export type PostImagesImageIdBreedsMutationResult = NonNullable<
   Awaited<ReturnType<typeof postImagesImageIdBreeds>>
 >;
-export type PostImagesImageIdBreedsMutationBody =
-  BodyType<PostImagesImageIdBreedsBody>;
+export type PostImagesImageIdBreedsMutationBody = BodyType<PostImagesImageIdBreedsBody>;
 export type PostImagesImageIdBreedsMutationError = ErrorType<unknown>;
 
 /**
@@ -587,7 +525,7 @@ export const usePostImagesImageIdBreeds = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postImagesImageIdBreeds>>,
     TError,
-    { imageId: string; data: BodyType<PostImagesImageIdBreedsBody> },
+    {imageId: string; data: BodyType<PostImagesImageIdBreedsBody>},
     TContext
   >;
 }) => {
@@ -599,10 +537,7 @@ export const usePostImagesImageIdBreeds = <
 /**
  * @summary /images/:image_id/breeds/:breed_id
  */
-export const deleteImagesImageIdBreedsBreedId = (
-  imageId: string,
-  breedId: string
-) => {
+export const deleteImagesImageIdBreedsBreedId = (imageId: string, breedId: string) => {
   return customInstance<unknown>({
     url: `/images/${imageId}/breeds/${breedId}`,
     method: "delete",
@@ -616,27 +551,27 @@ export const getDeleteImagesImageIdBreedsBreedIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteImagesImageIdBreedsBreedId>>,
     TError,
-    { imageId: string; breedId: string },
+    {imageId: string; breedId: string},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteImagesImageIdBreedsBreedId>>,
   TError,
-  { imageId: string; breedId: string },
+  {imageId: string; breedId: string},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteImagesImageIdBreedsBreedId>>,
-    { imageId: string; breedId: string }
+    {imageId: string; breedId: string}
   > = (props) => {
-    const { imageId, breedId } = props ?? {};
+    const {imageId, breedId} = props ?? {};
 
     return deleteImagesImageIdBreedsBreedId(imageId, breedId);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
 export type DeleteImagesImageIdBreedsBreedIdMutationResult = NonNullable<
@@ -655,12 +590,11 @@ export const useDeleteImagesImageIdBreedsBreedId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteImagesImageIdBreedsBreedId>>,
     TError,
-    { imageId: string; breedId: string },
+    {imageId: string; breedId: string},
     TContext
   >;
 }) => {
-  const mutationOptions =
-    getDeleteImagesImageIdBreedsBreedIdMutationOptions(options);
+  const mutationOptions = getDeleteImagesImageIdBreedsBreedIdMutationOptions(options);
 
   return useMutation(mutationOptions);
 };
@@ -687,29 +621,24 @@ export const getGetBreedsQueryOptions = <
 >(
   params?: GetBreedsParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getBreeds>>, TError, TData>
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getBreeds>>, TError, TData>>;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetBreedsQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBreeds>>> = ({
-    signal,
-  }) => getBreeds(params, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBreeds>>> = ({signal}) =>
+    getBreeds(params, signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getBreeds>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetBreedsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getBreeds>>
->;
+export type GetBreedsQueryResult = NonNullable<Awaited<ReturnType<typeof getBreeds>>>;
 export type GetBreedsQueryError = ErrorType<unknown>;
 
 /**
@@ -721,11 +650,9 @@ export const useGetBreeds = <
 >(
   params?: GetBreedsParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getBreeds>>, TError, TData>
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getBreeds>>, TError, TData>>;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetBreedsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -758,39 +685,27 @@ export const getGetBreedsBreedIdQueryOptions = <
 >(
   breedId: string,
   options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getBreedsBreedId>>,
-        TError,
-        TData
-      >
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getBreedsBreedId>>, TError, TData>>;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetBreedsBreedIdQueryKey(breedId);
+  const queryKey = queryOptions?.queryKey ?? getGetBreedsBreedIdQueryKey(breedId);
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getBreedsBreedId>>
-  > = ({ signal }) => getBreedsBreedId(breedId, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBreedsBreedId>>> = ({signal}) =>
+    getBreedsBreedId(breedId, signal);
 
   return {
     queryKey,
     queryFn,
     enabled: !!breedId,
     ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getBreedsBreedId>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
+  } as UseQueryOptions<Awaited<ReturnType<typeof getBreedsBreedId>>, TError, TData> & {
+    queryKey: QueryKey;
+  };
 };
 
-export type GetBreedsBreedIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getBreedsBreedId>>
->;
+export type GetBreedsBreedIdQueryResult = NonNullable<Awaited<ReturnType<typeof getBreedsBreedId>>>;
 export type GetBreedsBreedIdQueryError = ErrorType<unknown>;
 
 /**
@@ -802,15 +717,9 @@ export const useGetBreedsBreedId = <
 >(
   breedId: string,
   options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getBreedsBreedId>>,
-        TError,
-        TData
-      >
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getBreedsBreedId>>, TError, TData>>;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetBreedsBreedIdQueryOptions(breedId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -858,33 +767,25 @@ export const getGetBreedsBreedIdFactsQueryOptions = <
   params?: GetBreedsBreedIdFactsParams,
   options?: {
     query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getBreedsBreedIdFacts>>,
-        TError,
-        TData
-      >
+      UseQueryOptions<Awaited<ReturnType<typeof getBreedsBreedIdFacts>>, TError, TData>
     >;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetBreedsBreedIdFactsQueryKey(breedId, params);
+  const queryKey = queryOptions?.queryKey ?? getGetBreedsBreedIdFactsQueryKey(breedId, params);
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getBreedsBreedIdFacts>>
-  > = ({ signal }) => getBreedsBreedIdFacts(breedId, params, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBreedsBreedIdFacts>>> = ({signal}) =>
+    getBreedsBreedIdFacts(breedId, params, signal);
 
   return {
     queryKey,
     queryFn,
     enabled: !!breedId,
     ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getBreedsBreedIdFacts>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
+  } as UseQueryOptions<Awaited<ReturnType<typeof getBreedsBreedIdFacts>>, TError, TData> & {
+    queryKey: QueryKey;
+  };
 };
 
 export type GetBreedsBreedIdFactsQueryResult = NonNullable<
@@ -903,19 +804,11 @@ export const useGetBreedsBreedIdFacts = <
   params?: GetBreedsBreedIdFactsParams,
   options?: {
     query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getBreedsBreedIdFacts>>,
-        TError,
-        TData
-      >
+      UseQueryOptions<Awaited<ReturnType<typeof getBreedsBreedIdFacts>>, TError, TData>
     >;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetBreedsBreedIdFactsQueryOptions(
-    breedId,
-    params,
-    options
-  );
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const queryOptions = getGetBreedsBreedIdFactsQueryOptions(breedId, params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -929,10 +822,7 @@ export const useGetBreedsBreedIdFacts = <
 /**
  * @summary Search Breeds
  */
-export const getBreedsSearch = (
-  params?: GetBreedsSearchParams,
-  signal?: AbortSignal
-) => {
+export const getBreedsSearch = (params?: GetBreedsSearchParams, signal?: AbortSignal) => {
   return customInstance<GetBreedsSearch200>({
     url: `/breeds/search`,
     method: "get",
@@ -951,33 +841,24 @@ export const getGetBreedsSearchQueryOptions = <
 >(
   params?: GetBreedsSearchParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getBreedsSearch>>,
-        TError,
-        TData
-      >
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getBreedsSearch>>, TError, TData>>;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetBreedsSearchQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBreedsSearch>>> = ({
-    signal,
-  }) => getBreedsSearch(params, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBreedsSearch>>> = ({signal}) =>
+    getBreedsSearch(params, signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getBreedsSearch>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetBreedsSearchQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getBreedsSearch>>
->;
+export type GetBreedsSearchQueryResult = NonNullable<Awaited<ReturnType<typeof getBreedsSearch>>>;
 export type GetBreedsSearchQueryError = ErrorType<unknown>;
 
 /**
@@ -989,15 +870,9 @@ export const useGetBreedsSearch = <
 >(
   params?: GetBreedsSearchParams,
   options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getBreedsSearch>>,
-        TError,
-        TData
-      >
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getBreedsSearch>>, TError, TData>>;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetBreedsSearchQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1028,28 +903,23 @@ export const getGetFavouritesQueryOptions = <
   TData = Awaited<ReturnType<typeof getFavourites>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<Awaited<ReturnType<typeof getFavourites>>, TError, TData>
-  >;
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getFavourites>>, TError, TData>>;
 }) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetFavouritesQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getFavourites>>> = ({
-    signal,
-  }) => getFavourites(signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getFavourites>>> = ({signal}) =>
+    getFavourites(signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getFavourites>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetFavouritesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getFavourites>>
->;
+export type GetFavouritesQueryResult = NonNullable<Awaited<ReturnType<typeof getFavourites>>>;
 export type GetFavouritesQueryError = ErrorType<unknown>;
 
 /**
@@ -1059,10 +929,8 @@ export const useGetFavourites = <
   TData = Awaited<ReturnType<typeof getFavourites>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<Awaited<ReturnType<typeof getFavourites>>, TError, TData>
-  >;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getFavourites>>, TError, TData>>;
+}): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetFavouritesQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1077,13 +945,11 @@ export const useGetFavourites = <
 /**
  * @summary /favourites
  */
-export const postFavourites = (
-  postFavouritesBody: BodyType<PostFavouritesBody>
-) => {
+export const postFavourites = (postFavouritesBody: BodyType<PostFavouritesBody>) => {
   return customInstance<PostFavourites200>({
     url: `/favourites`,
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
     data: postFavouritesBody,
   });
 };
@@ -1095,46 +961,41 @@ export const getPostFavouritesMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postFavourites>>,
     TError,
-    { data: BodyType<PostFavouritesBody> },
+    {data: BodyType<PostFavouritesBody>},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postFavourites>>,
   TError,
-  { data: BodyType<PostFavouritesBody> },
+  {data: BodyType<PostFavouritesBody>},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postFavourites>>,
-    { data: BodyType<PostFavouritesBody> }
+    {data: BodyType<PostFavouritesBody>}
   > = (props) => {
-    const { data } = props ?? {};
+    const {data} = props ?? {};
 
     return postFavourites(data);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
-export type PostFavouritesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postFavourites>>
->;
+export type PostFavouritesMutationResult = NonNullable<Awaited<ReturnType<typeof postFavourites>>>;
 export type PostFavouritesMutationBody = BodyType<PostFavouritesBody>;
 export type PostFavouritesMutationError = ErrorType<unknown>;
 
 /**
  * @summary /favourites
  */
-export const usePostFavourites = <
-  TError = ErrorType<unknown>,
-  TContext = unknown,
->(options?: {
+export const usePostFavourites = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postFavourites>>,
     TError,
-    { data: BodyType<PostFavouritesBody> },
+    {data: BodyType<PostFavouritesBody>},
     TContext
   >;
 }) => {
@@ -1146,10 +1007,7 @@ export const usePostFavourites = <
 /**
  * @summary /favourites/:favourite_id
  */
-export const getFavouritesFavouriteId = (
-  favouriteId: string,
-  signal?: AbortSignal
-) => {
+export const getFavouritesFavouriteId = (favouriteId: string, signal?: AbortSignal) => {
   return customInstance<unknown>({
     url: `/favourites/${favouriteId}`,
     method: "get",
@@ -1168,33 +1026,25 @@ export const getGetFavouritesFavouriteIdQueryOptions = <
   favouriteId: string,
   options?: {
     query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getFavouritesFavouriteId>>,
-        TError,
-        TData
-      >
+      UseQueryOptions<Awaited<ReturnType<typeof getFavouritesFavouriteId>>, TError, TData>
     >;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetFavouritesFavouriteIdQueryKey(favouriteId);
+  const queryKey = queryOptions?.queryKey ?? getGetFavouritesFavouriteIdQueryKey(favouriteId);
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getFavouritesFavouriteId>>
-  > = ({ signal }) => getFavouritesFavouriteId(favouriteId, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getFavouritesFavouriteId>>> = ({signal}) =>
+    getFavouritesFavouriteId(favouriteId, signal);
 
   return {
     queryKey,
     queryFn,
     enabled: !!favouriteId,
     ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getFavouritesFavouriteId>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
+  } as UseQueryOptions<Awaited<ReturnType<typeof getFavouritesFavouriteId>>, TError, TData> & {
+    queryKey: QueryKey;
+  };
 };
 
 export type GetFavouritesFavouriteIdQueryResult = NonNullable<
@@ -1212,18 +1062,11 @@ export const useGetFavouritesFavouriteId = <
   favouriteId: string,
   options?: {
     query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof getFavouritesFavouriteId>>,
-        TError,
-        TData
-      >
+      UseQueryOptions<Awaited<ReturnType<typeof getFavouritesFavouriteId>>, TError, TData>
     >;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetFavouritesFavouriteIdQueryOptions(
-    favouriteId,
-    options
-  );
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const queryOptions = getGetFavouritesFavouriteIdQueryOptions(favouriteId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -1251,27 +1094,27 @@ export const getDeleteFavouritesFavouriteIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteFavouritesFavouriteId>>,
     TError,
-    { favouriteId: string },
+    {favouriteId: string},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteFavouritesFavouriteId>>,
   TError,
-  { favouriteId: string },
+  {favouriteId: string},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteFavouritesFavouriteId>>,
-    { favouriteId: string }
+    {favouriteId: string}
   > = (props) => {
-    const { favouriteId } = props ?? {};
+    const {favouriteId} = props ?? {};
 
     return deleteFavouritesFavouriteId(favouriteId);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
 export type DeleteFavouritesFavouriteIdMutationResult = NonNullable<
@@ -1290,12 +1133,11 @@ export const useDeleteFavouritesFavouriteId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteFavouritesFavouriteId>>,
     TError,
-    { favouriteId: string },
+    {favouriteId: string},
     TContext
   >;
 }) => {
-  const mutationOptions =
-    getDeleteFavouritesFavouriteIdMutationOptions(options);
+  const mutationOptions = getDeleteFavouritesFavouriteIdMutationOptions(options);
 
   return useMutation(mutationOptions);
 };
@@ -1304,7 +1146,7 @@ export const useDeleteFavouritesFavouriteId = <
  * @summary /votes
  */
 export const getVotes = (signal?: AbortSignal) => {
-  return customInstance<GetVotes200>({ url: `/votes`, method: "get", signal });
+  return customInstance<GetVotes200>({url: `/votes`, method: "get", signal});
 };
 
 export const getGetVotesQueryKey = () => {
@@ -1315,28 +1157,23 @@ export const getGetVotesQueryOptions = <
   TData = Awaited<ReturnType<typeof getVotes>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<Awaited<ReturnType<typeof getVotes>>, TError, TData>
-  >;
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getVotes>>, TError, TData>>;
 }) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetVotesQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getVotes>>> = ({
-    signal,
-  }) => getVotes(signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getVotes>>> = ({signal}) =>
+    getVotes(signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getVotes>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetVotesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getVotes>>
->;
+export type GetVotesQueryResult = NonNullable<Awaited<ReturnType<typeof getVotes>>>;
 export type GetVotesQueryError = ErrorType<unknown>;
 
 /**
@@ -1346,10 +1183,8 @@ export const useGetVotes = <
   TData = Awaited<ReturnType<typeof getVotes>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<Awaited<ReturnType<typeof getVotes>>, TError, TData>
-  >;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getVotes>>, TError, TData>>;
+}): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetVotesQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1368,7 +1203,7 @@ export const postVotes = (postVotesBody: BodyType<PostVotesBody>) => {
   return customInstance<PostVotes201>({
     url: `/votes`,
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
     data: postVotesBody,
   });
 };
@@ -1380,46 +1215,41 @@ export const getPostVotesMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postVotes>>,
     TError,
-    { data: BodyType<PostVotesBody> },
+    {data: BodyType<PostVotesBody>},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postVotes>>,
   TError,
-  { data: BodyType<PostVotesBody> },
+  {data: BodyType<PostVotesBody>},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postVotes>>,
-    { data: BodyType<PostVotesBody> }
+    {data: BodyType<PostVotesBody>}
   > = (props) => {
-    const { data } = props ?? {};
+    const {data} = props ?? {};
 
     return postVotes(data);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
-export type PostVotesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postVotes>>
->;
+export type PostVotesMutationResult = NonNullable<Awaited<ReturnType<typeof postVotes>>>;
 export type PostVotesMutationBody = BodyType<PostVotesBody>;
 export type PostVotesMutationError = ErrorType<unknown>;
 
 /**
  * @summary /votes
  */
-export const usePostVotes = <
-  TError = ErrorType<unknown>,
-  TContext = unknown,
->(options?: {
+export const usePostVotes = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postVotes>>,
     TError,
-    { data: BodyType<PostVotesBody> },
+    {data: BodyType<PostVotesBody>},
     TContext
   >;
 }) => {
@@ -1449,34 +1279,27 @@ export const getGetVotesVoteIdQueryOptions = <
 >(
   voteId: string,
   options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getVotesVoteId>>, TError, TData>
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getVotesVoteId>>, TError, TData>>;
   }
 ) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetVotesVoteIdQueryKey(voteId);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getVotesVoteId>>> = ({
-    signal,
-  }) => getVotesVoteId(voteId, signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getVotesVoteId>>> = ({signal}) =>
+    getVotesVoteId(voteId, signal);
 
   return {
     queryKey,
     queryFn,
     enabled: !!voteId,
     ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof getVotesVoteId>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
+  } as UseQueryOptions<Awaited<ReturnType<typeof getVotesVoteId>>, TError, TData> & {
+    queryKey: QueryKey;
+  };
 };
 
-export type GetVotesVoteIdQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getVotesVoteId>>
->;
+export type GetVotesVoteIdQueryResult = NonNullable<Awaited<ReturnType<typeof getVotesVoteId>>>;
 export type GetVotesVoteIdQueryError = ErrorType<unknown>;
 
 /**
@@ -1488,11 +1311,9 @@ export const useGetVotesVoteId = <
 >(
   voteId: string,
   options?: {
-    query?: Partial<
-      UseQueryOptions<Awaited<ReturnType<typeof getVotesVoteId>>, TError, TData>
-    >;
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getVotesVoteId>>, TError, TData>>;
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetVotesVoteIdQueryOptions(voteId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1508,7 +1329,7 @@ export const useGetVotesVoteId = <
  * @summary /votes/:vote_id
  */
 export const deleteVoteVoteId = (voteId: string) => {
-  return customInstance<unknown>({ url: `/vote/${voteId}`, method: "delete" });
+  return customInstance<unknown>({url: `/vote/${voteId}`, method: "delete"});
 };
 
 export const getDeleteVoteVoteIdMutationOptions = <
@@ -1518,27 +1339,27 @@ export const getDeleteVoteVoteIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteVoteVoteId>>,
     TError,
-    { voteId: string },
+    {voteId: string},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteVoteVoteId>>,
   TError,
-  { voteId: string },
+  {voteId: string},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteVoteVoteId>>,
-    { voteId: string }
+    {voteId: string}
   > = (props) => {
-    const { voteId } = props ?? {};
+    const {voteId} = props ?? {};
 
     return deleteVoteVoteId(voteId);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
 export type DeleteVoteVoteIdMutationResult = NonNullable<
@@ -1550,14 +1371,11 @@ export type DeleteVoteVoteIdMutationError = ErrorType<unknown>;
 /**
  * @summary /votes/:vote_id
  */
-export const useDeleteVoteVoteId = <
-  TError = ErrorType<unknown>,
-  TContext = unknown,
->(options?: {
+export const useDeleteVoteVoteId = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteVoteVoteId>>,
     TError,
-    { voteId: string },
+    {voteId: string},
     TContext
   >;
 }) => {
@@ -1573,7 +1391,7 @@ export const postWebhooks = (postWebhooksBody: BodyType<PostWebhooksBody>) => {
   return customInstance<PostWebhooks200>({
     url: `/webhooks`,
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
     data: postWebhooksBody,
   });
 };
@@ -1585,46 +1403,41 @@ export const getPostWebhooksMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postWebhooks>>,
     TError,
-    { data: BodyType<PostWebhooksBody> },
+    {data: BodyType<PostWebhooksBody>},
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postWebhooks>>,
   TError,
-  { data: BodyType<PostWebhooksBody> },
+  {data: BodyType<PostWebhooksBody>},
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {};
+  const {mutation: mutationOptions} = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postWebhooks>>,
-    { data: BodyType<PostWebhooksBody> }
+    {data: BodyType<PostWebhooksBody>}
   > = (props) => {
-    const { data } = props ?? {};
+    const {data} = props ?? {};
 
     return postWebhooks(data);
   };
 
-  return { mutationFn, ...mutationOptions };
+  return {mutationFn, ...mutationOptions};
 };
 
-export type PostWebhooksMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postWebhooks>>
->;
+export type PostWebhooksMutationResult = NonNullable<Awaited<ReturnType<typeof postWebhooks>>>;
 export type PostWebhooksMutationBody = BodyType<PostWebhooksBody>;
 export type PostWebhooksMutationError = ErrorType<unknown>;
 
 /**
  * @summary Create Webhook
  */
-export const usePostWebhooks = <
-  TError = ErrorType<unknown>,
-  TContext = unknown,
->(options?: {
+export const usePostWebhooks = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postWebhooks>>,
     TError,
-    { data: BodyType<PostWebhooksBody> },
+    {data: BodyType<PostWebhooksBody>},
     TContext
   >;
 }) => {
@@ -1638,7 +1451,7 @@ export const usePostWebhooks = <
  * @summary Get Random Fact(s)
  */
 export const getFacts = (signal?: AbortSignal) => {
-  return customInstance<GetFacts200>({ url: `/facts`, method: "get", signal });
+  return customInstance<GetFacts200>({url: `/facts`, method: "get", signal});
 };
 
 export const getGetFactsQueryKey = () => {
@@ -1649,28 +1462,23 @@ export const getGetFactsQueryOptions = <
   TData = Awaited<ReturnType<typeof getFacts>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<Awaited<ReturnType<typeof getFacts>>, TError, TData>
-  >;
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getFacts>>, TError, TData>>;
 }) => {
-  const { query: queryOptions } = options ?? {};
+  const {query: queryOptions} = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetFactsQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getFacts>>> = ({
-    signal,
-  }) => getFacts(signal);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getFacts>>> = ({signal}) =>
+    getFacts(signal);
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
     Awaited<ReturnType<typeof getFacts>>,
     TError,
     TData
-  > & { queryKey: QueryKey };
+  > & {queryKey: QueryKey};
 };
 
-export type GetFactsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getFacts>>
->;
+export type GetFactsQueryResult = NonNullable<Awaited<ReturnType<typeof getFacts>>>;
 export type GetFactsQueryError = ErrorType<unknown>;
 
 /**
@@ -1680,10 +1488,8 @@ export const useGetFacts = <
   TData = Awaited<ReturnType<typeof getFacts>>,
   TError = ErrorType<unknown>,
 >(options?: {
-  query?: Partial<
-    UseQueryOptions<Awaited<ReturnType<typeof getFacts>>, TError, TData>
-  >;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getFacts>>, TError, TData>>;
+}): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
   const queryOptions = getGetFactsQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {

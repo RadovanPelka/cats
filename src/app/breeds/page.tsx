@@ -1,11 +1,11 @@
 "use client";
-import { useGetBreeds, useGetImagesSearch } from "@/api/catsApi";
-import { BreedDetail, GetBreeds200 } from "@/api/schemas";
+import {useGetBreeds, useGetImagesSearch} from "@/api/catsApi";
+import {BreedDetail, GetBreeds200} from "@/api/schemas";
 import Modal from "@/components/Modal";
 import clsx from "clsx";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useEffect, useState} from "react";
 import StarIcon from "../icons/StarIcon";
 import CatDetail from "@/components/cat-detail/CatDetail";
 import Spinner from "@/components/Spinner";
@@ -16,8 +16,8 @@ type ModalBodyProps = {
   breed: BreedDetail;
 };
 
-const ModalBody = ({ breedId, breed }: ModalBodyProps) => {
-  const { data } = useGetImagesSearch({
+const ModalBody = ({breedId, breed}: ModalBodyProps) => {
+  const {data} = useGetImagesSearch({
     breed_ids: breedId,
   });
 
@@ -27,12 +27,12 @@ const ModalBody = ({ breedId, breed }: ModalBodyProps) => {
 
       <h3 className="mb-2 text-sm">Photos</h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {data?.map((cat) => (
           <Link href={`/?catId=${cat.id}`} key={cat.id}>
             <Image
               key={cat.id}
-              className="h-[200px] w-full object-cover max-w-full rounded-lg hover:scale-95 transition-all duration-300 ease-in-out cursor-pointer"
+              className="h-[200px] w-full max-w-full cursor-pointer rounded-lg object-cover transition-all duration-300 ease-in-out hover:scale-95"
               src={cat.url}
               alt=""
               width={200}
@@ -47,10 +47,10 @@ const ModalBody = ({ breedId, breed }: ModalBodyProps) => {
 
 export default function Breeds() {
   const [breeds, setBreeds] = useState<GetBreeds200>([]);
-  const { replace } = useRouter();
-  const { get } = useSearchParams();
+  const {replace} = useRouter();
+  const {get} = useSearchParams();
 
-  const { data, refetch, isFetching } = useGetBreeds();
+  const {data, refetch, isFetching} = useGetBreeds();
 
   useEffect(() => {
     data && setBreeds((prev) => [...prev, ...data]);
@@ -88,43 +88,25 @@ export default function Breeds() {
       {breeds.length !== 0 && (
         <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <table className="w-full text-left text-sm text-gray-500">
+              <thead className="bg-gray-50 text-xs uppercase text-gray-700">
                 <tr>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-center whitespace-nowrap"
-                  >
+                  <th scope="col" className="whitespace-nowrap px-4 py-3 text-center">
                     User
                   </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-center whitespace-nowrap"
-                  >
+                  <th scope="col" className="whitespace-nowrap px-4 py-3 text-center">
                     Origin
                   </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-center whitespace-nowrap"
-                  >
+                  <th scope="col" className="whitespace-nowrap px-4 py-3 text-center">
                     Intelligence
                   </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-center whitespace-nowrap"
-                  >
+                  <th scope="col" className="whitespace-nowrap px-4 py-3 text-center">
                     Life span
                   </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-center whitespace-nowrap"
-                  >
+                  <th scope="col" className="whitespace-nowrap px-4 py-3 text-center">
                     Energy level
                   </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-center whitespace-nowrap"
-                  >
+                  <th scope="col" className="whitespace-nowrap px-4 py-3 text-center">
                     Weight
                   </th>
                   <th scope="col" className="px-4 py-3">
@@ -141,14 +123,14 @@ export default function Breeds() {
                   >
                     <th
                       scope="row"
-                      className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap"
+                      className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
                     >
                       <div className="flex items-center">
                         {breed.image?.url && (
                           <Image
                             src={breed.image?.url}
                             alt="iMac Front Image"
-                            className="w-14 h-14 mr-3 rounded-full"
+                            className="mr-3 h-14 w-14 rounded-full"
                             width={32}
                             height={32}
                           />
@@ -157,7 +139,7 @@ export default function Breeds() {
                       </div>
                     </th>
                     <td className="px-4 py-2 text-center">{breed.origin}</td>
-                    <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                       <div className="flex items-center justify-center">
                         {Array(breed.intelligence)
                           .fill(0)
@@ -167,10 +149,10 @@ export default function Breeds() {
                         {breed.energy_level === 1 && "Super lazzzyy"}
                       </div>
                     </td>
-                    <td className="px-4 py-2 text-center whitespace-nowrap">
+                    <td className="whitespace-nowrap px-4 py-2 text-center">
                       {breed.life_span} years
                     </td>
-                    <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                       <div className="flex items-center justify-center">
                         {Array(breed.energy_level)
                           .fill(0)
@@ -178,7 +160,7 @@ export default function Breeds() {
                             <div
                               key={i}
                               className={clsx(
-                                "w-3 h-3 mr-1 rounded-full",
+                                "mr-1 h-3 w-3 rounded-full",
                                 breed.energy_level >= 4 && "bg-green-500",
                                 breed.energy_level <= 3 && "bg-orange-500",
                                 breed.energy_level <= 2 && "bg-red-500"
@@ -188,17 +170,17 @@ export default function Breeds() {
                         {breed.energy_level === 1 && "Super lazzzyy"}
                       </div>
                     </td>
-                    <td className="px-4 py-2 whitespace-nowrap text-center">
+                    <td className="whitespace-nowrap px-4 py-2 text-center">
                       <div className="flex flex-col text-sm">
                         <p className="text-xs">{breed.weight.metric} kg</p>
                         <p className="text-xs">{breed.weight.imperial} lbs</p>
                       </div>
                     </td>
 
-                    <td className="px-4 py-2 whitespace-nowrap">
+                    <td className="whitespace-nowrap px-4 py-2">
                       <a
                         target="_blank"
-                        className="transition hover:text-gray-900 flex items-center space-x-2 whitespace-nowrap underline"
+                        className="flex items-center space-x-2 whitespace-nowrap underline transition hover:text-gray-900"
                         href={breed.wikipedia_url}
                         onClick={(e) => e.stopPropagation()}
                       >

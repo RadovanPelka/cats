@@ -20,4 +20,4 @@ Just signup for an API Key from https://thecatapi.com for free. We're looking fo
  * OpenAPI spec version: 1.6.1
  */
 
-export type PostVotes201 = { [key: string]: any };
+export type PostVotes201 = {[key: string]: any};

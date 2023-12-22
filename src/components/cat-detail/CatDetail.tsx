@@ -1,4 +1,4 @@
-import { BreedDetail } from "@/api/schemas";
+import {BreedDetail} from "@/api/schemas";
 import React from "react";
 import Image from "next/image";
 import StarIcon from "@/app/icons/StarIcon";
@@ -10,12 +10,7 @@ type CatDetailProps = {
   largeImage?: boolean;
 };
 
-const CatDetail = ({
-  breed,
-  imageUrl,
-  customComponent,
-  largeImage,
-}: CatDetailProps) => {
+const CatDetail = ({breed, imageUrl, customComponent, largeImage}: CatDetailProps) => {
   if (!breed && !imageUrl) return null;
 
   const imageSize = largeImage ? 400 : 200;
@@ -27,7 +22,7 @@ const CatDetail = ({
           alt={breed?.name || "Cat"}
           width={imageSize}
           height={imageSize}
-          className="rounded-lg min-h-[200px] object-cover"
+          className="min-h-[200px] rounded-lg object-cover"
           src={imageUrl}
         />
       )}

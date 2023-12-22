@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig, AxiosError } from "axios";
+import Axios, {AxiosRequestConfig, AxiosError} from "axios";
 
 export const AXIOS_INSTANCE = Axios.create({
   baseURL: "https://api.thecatapi.com/v1",
@@ -30,7 +30,7 @@ export const customInstance = <T>(
     ...config,
     ...options,
     cancelToken: source.token,
-  }).then(({ data }) => data);
+  }).then(({data}) => data);
 
   // @ts-ignore add cancel method to promise
   promise.cancel = () => {

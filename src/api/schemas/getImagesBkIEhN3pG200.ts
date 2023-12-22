@@ -20,4 +20,4 @@ Just signup for an API Key from https://thecatapi.com for free. We're looking fo
  * OpenAPI spec version: 1.6.1
  */
 
-export type GetImagesBkIEhN3pG200 = { [key: string]: any };
+export type GetImagesBkIEhN3pG200 = {[key: string]: any};

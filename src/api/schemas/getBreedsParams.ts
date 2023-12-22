@@ -21,6 +21,6 @@ Just signup for an API Key from https://thecatapi.com for free. We're looking fo
  */
 
 export type GetBreedsParams = {
-limit?: number;
-page?: number;
+  limit?: number;
+  page?: number;
 };
